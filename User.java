@@ -5,7 +5,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * A classe User é responsável por gerenciar a conexão com o banco de dados,
+ * autenticar usuários e verificar suas credenciais.
+ */
 public class User {
+
+    /**
+     * Estabelece a conexão com o banco de dados MySQL.
+     * 
+     * @return Connection A conexão com o banco de dados ou null se a conexão falhar.
+     */
     public Connection conectarBD() {
         Connection conn = null;
         try {
@@ -18,6 +28,15 @@ public class User {
 
     public String nome = "";
     public boolean result = false;
+
+    /**
+     * Verifica se um usuário existe no banco de dados, comparando o login
+     * e a senha fornecidos com os registrados no banco.
+     * 
+     * @param login O login do usuário.
+     * @param senha A senha do usuário.
+     * @return boolean Retorna true se o usuário for encontrado e false caso contrário.
+     */
     public boolean verificarUsuario(String login, String senha) {
         String sql = "";
         Connection conn = conectarBD();
@@ -36,13 +55,3 @@ public class User {
         return result;
     }
 }
-// fim da class
-
-/*1.1 Pontos de Erro no Código
-Tratamento de Erros: Falta tratamento adequado de exceções.
-
-Injeção de SQL: Vulnerável a injeções de SQL.
-
-Classe DriverManager: Erro de tipografia em Class.forName("com.mysql.Driver.Manager").newInstance();.
-
-Fechamento de Conexões: Conexões não são fechadas corretamente. */
